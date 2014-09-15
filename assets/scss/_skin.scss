@@ -1,0 +1,21 @@
+// -------------------------------------
+//   Skin - Backgrounds, Borders, Box-shadow, etc
+// -------------------------------------
+
+// FLASHES
+
+.success {
+	@extend %flash-success;
+}
+
+.error {
+	@extend %flash-error;
+}
+
+.notice {
+	@extend %flash-notice;
+}
+
+.alert {
+	@extend %flash-alert;
+}

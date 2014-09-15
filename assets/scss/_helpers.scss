@@ -1,0 +1,377 @@
+// -------------------------------------
+//   Helpers
+// -------------------------------------
+// ----- Placeholders, Extends, Mixins, and Functions
+// -------------------------------------
+
+// -------------------------------------
+//   Placeholders
+// -------------------------------------
+
+// Image Replacement
+%ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  /* IE 6/7 fallback */
+  *text-indent: -9999px;
+}
+
+%ir:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 150%;
+}
+
+// Clearfix
+%clearfix:before,
+%clearfix:after {
+  // The space content is one way to avoid an Opera bug when the contenteditable attribute is included anywhere else in the document. Otherwise it causes space to appear at the top and bottom of elements that receive the `clearfix` class.
+  content: " ";
+  // The use of `table` rather than `block` is only necessary if using :before to contain the top-margins of child elements.
+  display: table;
+}
+
+%clearfix:after {
+  clear: both;
+}
+
+%clearfix {
+  // For IE 6/7 only - Include this rule to trigger hasLayout and contain floats
+  *zoom: 1;
+}
+
+// -------------------------------------
+//   Functions
+// -------------------------------------
+
+
+// -------------------------------------
+//   Mixins
+// -------------------------------------
+
+@mixin mq($point) {
+  @if $point == desktop {
+    @media (min-width: 1280px) { @content; }
+  }
+  @if $point == laptop {
+    @media (min-width: 960px) { @content; }
+  }
+  @else if $point == tablet {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $point == android {
+    @media (min-width: 480px)  { @content; }
+  }
+  @else if $point == iphone {
+    @media (min-width: 320px)  { @content; }
+  }
+}
+
+@mixin shadow-border($color) {
+  -webkit-box-shadow: 0px 0px 1px 1px $color, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+          box-shadow: 0px 0px 1px 1px $color, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+}
+
+@mixin fade-callout($value, $color, $font-color){
+   background: rgba(0, 0, 0, $value);
+  -webkit-box-shadow: 0px 0px 1px 1px $color, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+          box-shadow: 0px 0px 1px 1px $color, 0px 0px 3px 3px rgba(0, 0, 0, .5);
+    color: $font-color;
+}
+
+
+@mixin bg-contain {
+  background-position: center, center;
+  background-repeat: no-repeat;
+  -webkit-background-size: contain;
+       -o-background-size: contain;
+          background-size: contain;
+}
+
+@mixin bg-cover {
+  background-position: center, center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+
+@mixin grayscale-hover {
+  @include transition (all .3s ease-in-out);
+  &:hover {
+    -webkit-filter: grayscale(100%);
+  }
+}
+
+@mixin fade-hover {
+  @include transition (all .3s ease-in-out);
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}
+
+@mixin coverer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin word-wrap() {
+  word-break:     break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens:    auto;
+  hyphens:         auto;
+}
+
+@mixin ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@function black($opacity) {
+  @return rgba(black, $opacity)
+}
+@function white($opacity) {
+  @return rgba(white, $opacity)
+}
+
+// MEDIA QUERY MIXIN
+
+@mixin mq($point) {
+  @if $point == desktop {
+    @media (min-width: 1280px) { @content; }
+  }
+  @if $point == laptop {
+    @media (min-width: 960px) { @content; }
+  }
+  @else if $point == tablet {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $point == android {
+    @media (min-width: 480px)  { @content; }
+  }
+  @else if $point == iphone {
+    @media (min-width: 320px)  { @content; }
+  }
+}
+
+// -------------------------------------
+//   PINWHEEL - LARGE 3
+// -------------------------------------
+.l-pinwheel-large {
+  .half {
+    height: 27em;
+    text-align: center;
+    a{
+      font-size: 3em;
+    }
+
+    @include media(min-width 320px max-width 768px, 6) {
+      height: auto;
+    }
+  }
+
+  #pinwheel-lrg-btn-left, #pinwheel-lrg-btn-right {
+    position: relative;
+  }
+
+  .l-display-icon {
+    position: relative;
+    opacity: 1;
+    width: 200px;
+    height: 200px;
+    a:hover {
+      text-decoration: none;
+    }
+    p {
+      color: $deepRed;
+      text-shadow: 0 2px 2px $charcoal; 
+      opacity: 0;
+      padding-top: 1em;
+      &:hover {
+        text-decoration: none;
+        opacity: 1;
+      }
+      
+    }
+    &:hover {
+      cursor: pointer;
+      @include shadow-border(red);
+      -webkit-border-radius: 50%; 
+      border-radius: 50%;
+    }
+
+    @include media(min-width 320px max-width 480px, 6) {
+      width: 125px;
+      height: 125px;
+      margin: 3% 0;
+      text-align: center;
+      p {
+        padding-top: 0;
+      }
+    }   
+  }
+
+  #pin-lrg-left-right {
+    left: 260px;
+    top: 10px;
+    
+    @include background-image(url("../img/button-bg/garden-geek.png"), url("../img/button-bg/garden-geek.png"));
+    @include bg-contain;
+  }
+
+  #pin-lrg-left-left {
+    left: 5px;
+    top: -190px;
+    @include background-image(url("../img/button-bg/kew-button.png"), url("../img/button-bg/kew-button.png"));
+    @include bg-contain;
+  }
+
+  #pin-lrg-left-bottom {
+    top: -220px;
+    left: 130px;
+    @include background-image(url("../img/button-bg/skate-button.png"), url("../img/button-bg/skate-button.png"));
+    // @include background-image(url("../img/button-bg/garden-geek.png"), url("../img/button-bg/garden-geek.png"));
+    @include bg-contain;
+  }
+
+  #pin-lrg-right-right {
+    left: 260px;
+    top: 10px;
+    @include background-image(url("../img/kitchen.png"), url("../img/kitchen.png"));
+    @include bg-contain;
+  }
+
+  #pin-lrg-right-left {
+    left: 5px;
+    top: -190px;
+    @include background-image(url("../img/chevron_logo.png"), url("../img/chevron_logo.png"));
+    @include bg-contain;
+  }
+
+  #pin-lrg-right-bottom {
+    top: -220px;
+    left: 130px;
+    @include background-image(url("../img/ajax-logo.png"), url("../img/ajax-logo.png"));
+    @include bg-contain;
+  }
+
+  @include media(min-width 480px max-width 768px, 6) {
+    #pin-lrg-left-left, #pin-lrg-left-right,
+    #pin-lrg-left-bottom, #pin-lrg-right-left,
+    #pin-lrg-right-right, #pin-lrg-right-bottom {
+      left: 30% !important;
+      top: 0px !important;
+    }
+  }
+
+  @include media(min-width 320px max-width 480px, 6) {
+    #pin-lrg-left-left, #pin-lrg-left-right,
+    #pin-lrg-left-bottom, #pin-lrg-right-left,
+    #pin-lrg-right-right, #pin-lrg-right-bottom {
+      left: 30% !important;
+      top: 0px !important;
+    }
+  }
+
+}
+// -------------------------------------
+//   END PINWHEEL
+// -------------------------------------
+
+// -------------------------------------
+//   PINWHEEL - LARGE - FOUR COLUMNS
+// -------------------------------------
+.l-pinwheel-lrg-four {
+  .whole {
+    height: 17em;
+    text-align: center;
+    a{
+      font-size: 3em;
+    }
+  }
+
+  #pinwheel-lrg-four-btn {
+    position: relative;
+  }
+
+  .l-display-icon {
+    position: relative;
+    opacity: 1;
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 50%; 
+            border-radius: 50%;
+    @include media(min-width 320px max-width 480px, 6) {
+      width: 125px;
+      height: 125px;
+      margin: 3% 0;
+      display: block;
+    }   
+  }
+
+  #pin-lrg-four-left {
+    left: 15px;
+    top: 10px;
+  }
+
+  #pin-lrg-four-left-middle {
+    left: 250px;
+    top: -190px;
+  }
+
+  #pin-lrg-four-right-middle {
+    top: -390px;
+    left: 490px;
+  }
+
+  #pin-lrg-four-right {
+    left: 745px;
+    top: -590px;
+  }
+
+}
+// -------------------------------------
+//   END PINWHEEL
+// -------------------------------------
+
+// -------------------------------------
+//   Utilities
+// -------------------------------------
+
+.pull-left {
+  float: left !important;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.show-me {
+  border: 1px solid black;
+}
+
+.section-divider {
+  width: 100%;
+  height: 10px;
+  background: $charcoal;
+  margin: 1em 0;  
+}
+
